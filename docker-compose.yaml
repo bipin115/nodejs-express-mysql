@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  db:
+    build: ./db
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: express_db
+    restart: always
+  
+  web:
+    build: ./web
+    ports:
+      - "5000:8080"
+    depends_on:
+      - db
+    restart: on-failure
